@@ -29,7 +29,7 @@ typedef int64_t i64;
 // Assert / Debug related.
 #ifdef DEBUG_MODE
 #define ASSERT(x)                                                              \
-  if (!x) {                                                                    \
+  if (!(x)) {                                                                  \
     u8 *ptr = NULL;                                                            \
     *ptr = 0;                                                                  \
   }

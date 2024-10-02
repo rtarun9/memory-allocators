@@ -28,11 +28,12 @@ typedef int64_t i64;
 
 // Assert / Debug related.
 #ifdef DEBUG_MODE
-#define ASSERT(x)                                                              \
-  if (!(x)) {                                                                  \
-    u8 *ptr = NULL;                                                            \
-    *ptr = 0;                                                                  \
-  }
+#define ASSERT(x)                                                                                                      \
+    if (!(x))                                                                                                          \
+    {                                                                                                                  \
+        u8 *ptr = NULL;                                                                                                \
+        *ptr = 0;                                                                                                      \
+    }
 #endif
 
 #ifndef DEBUG_MODE
@@ -40,27 +41,29 @@ typedef int64_t i64;
 #endif
 
 // Commonly used math functions.
-internal i32
-is_power_of_2(size_t value) { // In binary, if a number if a power of 2,
-                              // then only a SINGLE bit will be set.
-                              // Moreoever, value - 1 will be all 1's.
+internal i32 is_power_of_2(size_t value)
+{ // In binary, if a number if a power of 2,
+  // then only a SINGLE bit will be set.
+  // Moreoever, value - 1 will be all 1's.
 
-  return (value != 0) && (value & (value - 1)) == 0;
+    return (value != 0) && (value & (value - 1)) == 0;
 }
 
-internal u8 *align_memory_address(u8 *value, size_t alignment_size) {
-  ASSERT(is_power_of_2(alignment_size) == 1);
+internal u8 *align_memory_address(u8 *value, size_t alignment_size)
+{
+    ASSERT(is_power_of_2(alignment_size) == 1);
 
-  // As alignment size will be a power of 2, to do a fast modulus operator doing
-  // value & (alignment_size - 1) will be sufficient.
-  size_t modulo = (size_t)value & (alignment_size - 1);
-  size_t result = (size_t)value;
+    // As alignment size will be a power of 2, to do a fast modulus operator doing
+    // value & (alignment_size - 1) will be sufficient.
+    size_t modulo = (size_t)value & (alignment_size - 1);
+    size_t result = (size_t)value;
 
-  if (modulo != 0) {
-    result += alignment_size - modulo;
-  }
+    if (modulo != 0)
+    {
+        result += alignment_size - modulo;
+    }
 
-  return (u8 *)result;
+    return (u8 *)result;
 }
 
 #endif
